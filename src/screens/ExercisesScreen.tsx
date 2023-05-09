@@ -1,12 +1,17 @@
 import React, { type PropsWithChildren } from 'react';
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native"
+import { FlatList, ScrollView, StyleSheet, Text, View, TouchableOpacity, Image } from "react-native"
 import { ButtonMercury } from '../components/ButtonMercury';
 import { ExerciseCard } from '../components/ExerciseCard';
+import NewExerciseCard from '../components/NewExerciseCard';
+import { ButtonMyProgress } from '../components/ButtonMyProgress';
 export const ExercisesScreen = (props: any) => {
     const { navigation, route } = props;
     const { params = {} } = route;
     const { title = "", exercises } = params;
     const { exercises: exercisesList } = exercises
+    const goToStats = () => {
+        navigation.navigate("StatsScreen", {})
+    }
     //console.log(exercisesList);
 
     // const goToExercise = (exercise:any) => {
@@ -14,42 +19,50 @@ export const ExercisesScreen = (props: any) => {
     // }
 
 
-    return <View style={{ flex: 1, alignItems: "center", backgroundColor:"white" }}>
-        <View style={styles.titleContainer}>
-            <Text style={styles.title}>
-                {title}
-            </Text>
-
-        </View>
+    return <View style={{ flex: 1, alignItems: "center", backgroundColor: "#FFFFFF", flexDirection: "column" }}>
+        <Text style={styles.title}>
+            May 2023
+        </Text>
+        <TouchableOpacity style={styles.imageContainer} onPress={goToStats}>
+            <Image style={styles.imageCalendar} source={require("../assets/extras/calendar.jpg")} />
+        </TouchableOpacity>
+        <Text style={styles.title}>
+            {title} workout
+        </Text>
 
         <FlatList
             data={exercisesList}
             keyExtractor={(exercise) => exercise.name}
             showsVerticalScrollIndicator={false}
-            
-            renderItem={({ item }) => <ExerciseCard exercise={item} navigation={navigation}/>}
+            numColumns={2}
+
+            // renderItem={({ item }) => <ExerciseCard exercise={item} navigation={navigation}/>}
+            renderItem={({ item }) => <NewExerciseCard exercise={item} navigation={navigation} />}
+
         />
+        <ButtonMyProgress text={"My Progress"}/>
 
     </View>
 }
 
 const styles = StyleSheet.create({
-    titleContainer: {
-        width: 250,
-        height: 50,
-        backgroundColor: "#DC4A00",
-        marginTop: 30,
-        marginBottom: 10,
-        borderRadius: 25,
-        justifyContent: "center",
-        alignItems: "center"
-    },
     title: {
-        color: "white",
+        color: "black",
+        fontFamily: 'Manrope-Bold',
         fontWeight: "bold",
-        fontSize: 30,
+        fontSize: 18,
+        margin: 10,
+        alignSelf: "flex-start"
 
-    }
-
-
+    },
+    imageContainer: {
+        width: '100%',
+        marginHorizontal: 10,
+        height: 64,
+    },
+    imageCalendar: {
+        width: "100%",
+        height: 64,
+        borderRadius: 8,
+    },
 });
