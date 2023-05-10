@@ -46,6 +46,10 @@ export const HomeScreen = (props: any) => {
         navigation.navigate("StatsScreen", {})
     }
 
+    const goToProgress = () => {
+        navigation.navigate("ProgressScreen", {})
+    }
+
     const goToPecho = () => {
         navigation.navigate("ExercisesScreen", { title: data.pecho.id, exercises: data.pecho.exercises })
     }
@@ -108,7 +112,7 @@ export const HomeScreen = (props: any) => {
             <ButtonMercury text="Abdomen" onPress={goToAbdomen} /> */}
         </ScrollView>
 
-        <ButtonMyProgress text={"My Progress"} onPress={goToPierna}/>
+        <ButtonMyProgress text={"My Progress"} onPress={goToProgress}/>
 
     </View>
 }

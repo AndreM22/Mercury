@@ -12,6 +12,10 @@ export const ExercisesScreen = (props: any) => {
     const goToStats = () => {
         navigation.navigate("StatsScreen", {})
     }
+
+    const goToProgress = () => {
+        navigation.navigate("ProgressScreen", {})
+    }
     //console.log(exercisesList);
 
     // const goToExercise = (exercise:any) => {
@@ -40,7 +44,7 @@ export const ExercisesScreen = (props: any) => {
             renderItem={({ item }) => <NewExerciseCard exercise={item} navigation={navigation} />}
 
         />
-        <ButtonMyProgress text={"My Progress"}/>
+        <ButtonMyProgress text={"My Progress"} onPress={goToProgress}/>
 
     </View>
 }

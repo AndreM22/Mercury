@@ -11,6 +11,10 @@ export const NewExerciseScreen = (props: any) => {
     const goToStats = () => {
         navigation.navigate("StatsScreen", {})
     }
+
+    const goToProgress = () => {
+        navigation.navigate("ProgressScreen", {})
+    }
     //console.log(exercisesList);
 
     // const goToExercise = (exercise:any) => {
@@ -50,7 +54,7 @@ export const NewExerciseScreen = (props: any) => {
             <Image style={styles.video} source={require("../assets/extras/video.jpg")} />
         </View>
 
-        <ButtonMyProgress text={"My Progress"} />
+        <ButtonMyProgress text={"My Progress"} onPress={goToProgress}/>
 
     </View>
 }
