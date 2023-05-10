@@ -243,8 +243,7 @@ const styles = StyleSheet.create({
     marginBottom:15
   },
   scrollContainer: {
-    width: 370,
-    padding:10,
+    flexGrow: 1
   },
   label: {
     marginLeft: 20,
@@ -254,7 +253,17 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    width: '100%',
+    width: '94%',
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 16,
+    marginBottom: 16,
+    marginLeft:20
+  },
+  input2 : {
+    height: 40,
+    width: 70,
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 5,
