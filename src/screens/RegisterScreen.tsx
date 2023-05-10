@@ -1,6 +1,7 @@
 import React, { useState, type PropsWithChildren } from 'react';
 import { Image, ScrollView, StyleSheet, Switch, Text, TextInput, TouchableOpacity, View } from "react-native"
-import { ExerciseContext } from '../context/exerciseContext';
+
+
 
 export const RegisterScreen = (props: any) => {
     const [firstName, setFirstName] = useState('');
@@ -8,6 +9,11 @@ export const RegisterScreen = (props: any) => {
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [height, setHeight] = useState('');
+    const [weight, setWeight] = useState('');
+    const [goals, setGoals] = useState('');
+    const [body, setBody] = useState('');
+    const [water, setWater] = useState('');
 
     const {navigation} = props;
     const [isFocused, setIsFocused] = useState(false);
@@ -47,6 +53,31 @@ export const RegisterScreen = (props: any) => {
   
     const handlePasswordInput = (text: React.SetStateAction<string>) => {
       setPassword(text);
+      checkFormCompletion();
+    };
+
+    const handleHeightInput = (text: React.SetStateAction<string>) => {
+        setHeight(text);
+        checkFormCompletion();
+      };
+
+    const handleWeightInput = (text: React.SetStateAction<string>) => {
+        setWeight(text);
+        checkFormCompletion();
+    };
+
+    const handleGoalsInput = (text: React.SetStateAction<string>) => {
+      setGoals(text);
+      checkFormCompletion();
+    };
+
+    const handleBodyInput = (text: React.SetStateAction<string>) => {
+      setBody(text);
+      checkFormCompletion();
+    };
+
+    const handleWaterInput = (text: React.SetStateAction<string>) => {
+      setWater(text);
       checkFormCompletion();
     };
   
@@ -117,12 +148,70 @@ export const RegisterScreen = (props: any) => {
             placeholder="Please enter your password"
             secureTextEntry
         />
+        <View style={styles.optionsContainer}>
+            <View style={styles.optionsContainer2}>
+                <Text style={styles.label}>Height</Text>
+                <TextInput
+                    style={[styles.input2, isFocused && styles.inputFocused]}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    onChangeText={handlePasswordInput}
+                    value={height}
+                    keyboardType="numeric"
+                />
+            </View>
+            <Text style={styles.text}>cm.</Text>
+            <View style={styles.optionsContainer3}>
+                <Text style={styles.label}>Weight</Text>
+                <TextInput
+                    style={[styles.input2, isFocused && styles.inputFocused]}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    onChangeText={handleWeightInput}
+                    value={weight}
+                    keyboardType="numeric"
+                />
+            </View>
+            <Text style={styles.text}>kg.</Text>
+        </View>
+        <Text style={styles.label}>Goals</Text>
+        <TextInput
+            style={[styles.input, isFocused && styles.inputFocused]}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChangeText={handleGoalsInput}
+            value={goals}
+            placeholder="Loss weight, gain muscle mass, etc."
+            keyboardType="default"
+        />
+        <Text style={styles.label}>Body type</Text>
+        <TextInput
+            style={[styles.input, isFocused && styles.inputFocused]}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            onChangeText={handleBodyInput}
+            value={body}
+            placeholder="Mesomorphic, endomorph, oval, square, etc."
+            keyboardType="default"
+        />
+          <Text style={styles.label}>Liters of water that you consume daily</Text>
+          <View style={styles.optionsContainer}>
+            <TextInput
+                style={[styles.input2, isFocused && styles.inputFocused]}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                onChangeText={handleWaterInput}
+                value={water}
+                keyboardType="numeric"
+            />
+            <Text style={styles.text2}>lt.</Text>
+          </View>
       </ScrollView>
       <TouchableOpacity
         onPress={goToLoginScreen} 
         disabled={!formComplete}
         style={formComplete ? styles.button : styles.buttonDisabled}>
-            <Text style={styles.buttonText}>Login</Text>
+            <Text style={styles.buttonText}>Sign up </Text>
         </TouchableOpacity>
         <View style={styles.newAccountContainer}>
             <Text style={styles.account}>Already have an account ? </Text>
@@ -154,8 +243,7 @@ const styles = StyleSheet.create({
     marginBottom:15
   },
   scrollContainer: {
-    width: 370,
-    padding:10,
+    flexGrow: 1
   },
   label: {
     marginLeft: 20,
@@ -165,7 +253,17 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    width: 320,
+    width: '94%',
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 16,
+    marginBottom: 16,
+    marginLeft:20
+  },
+  input2 : {
+    height: 40,
+    width: 70,
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 5,
@@ -177,6 +275,26 @@ const styles = StyleSheet.create({
     borderColor: '#351A96',
     borderWidth: 1,
     backgroundColor: '#F8F0FF'
+  },
+  optionsContainer: {
+    flexDirection: 'row',
+  },
+  optionsContainer2: {
+    flexDirection: 'column',
+  },
+  optionsContainer3: {
+    flexDirection: 'column',
+    marginLeft:50
+  },
+  text: {
+    color: 'black',
+    marginTop: 30,
+    marginLeft: 10
+  },
+  text2: {
+    color: 'black',
+    marginTop:10, 
+    marginLeft: 10
   },
   button: {
     height:40,
